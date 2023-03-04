@@ -11,4 +11,5 @@ CREATE TABLE employees (
     salary INT NOT NULL,
     isManager BOOLEAN DEFAULT false,
     manager VARCHAR(55) NOT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY
 );
