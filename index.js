@@ -5,7 +5,7 @@ require('dotenv').config;
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: process.env.MYSQL_PW,
+    password: '@1995Eclipse',
     database: 'employees_db'
   });
   
@@ -18,8 +18,8 @@ const connection = mysql.createConnection({
     });
 
 function mainMenu() {
-  inquirer.createPromptModule([
-    {type: 'list', name: 'action', message: 'What would you like to do?', choices: ['Add an employee', 'View all employees', 'Update an employee', 'Delete an employee', 'View by department', 'View management', 'View by role', 'End program']}
+  inquirer.prompt([
+    {type: 'list', name: 'action', message: 'What would you like to do?', choices: ['Add an employee', 'View all employees', 'Update an employee', 'Delete an employee', 'View by department', 'View management', 'View by role', 'end program']}
   ]).then(answer => {
     switch (answer.action) {
       case 'Add an employee':
