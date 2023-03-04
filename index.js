@@ -176,3 +176,94 @@ function updateEmployee() {
   });
 }
 
+function deleteEmployee() {
+  //inquirer prompt to ask which employee do you want to delete with an are you sure prompt after asking which employee to delete
+  inquirer.prompt([
+      {
+        type: 'number',
+        name: 'employee',
+        message: 'What is the id of the employee you would like to delete',
+      },
+      {
+        type: 'confirm',
+        name: 'confirm',
+        message: 'Are you sure you want to delete this employee?',
+        default: false
+      }
+    ]).then(answers => {
+      // Check if the user confirmed the delete
+      if (answers.confirm) {
+        // Delete the employee
+        const query = 'DELETE FROM employees WHERE id = ?';
+        connection.query(query, [answers.employee], (err, results) => {
+          if (err) {
+            console.error('Error deleting employee:', err);
+          } else {
+            console.log('Employee deleted successfully');
+          }
+          mainMenu();
+        });
+      } else {
+        // User did not confirm the delete, go back to main menu
+        mainMenu();
+      }
+    });
+  };
+
+function viewByDepartment() {
+  //asks which department they would like to view and then mysql code to view all employees in said department
+  inquirer.prompt([
+      {
+        type: "input",
+        name: "department",
+        message: "Enter the department to view:",
+      },
+    ]).then((answers) => {
+      const query = "SELECT * FROM employees WHERE department = ?";
+      connection.query(query, [answers.department], (err, results) => {
+        if (err) {
+          console.error("Error fetching employees by department:", err);
+        } else {
+          console.table(results);
+        }
+        mainMenu();
+      });
+    });
+}
+function viewManagement() {
+  //views all employees where the isManager boolean = true
+  const query = 'SELECT * FROM employees WHERE isManager = true';
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching Management Team:', err);
+    } else {
+      console.table(results);
+    }
+    mainMenu();
+  });
+}
+function viewByRole() {
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "title",
+      message: "Enter the job title to view:",
+    },
+  ]).then((answers) => {
+    const query = "SELECT * FROM employees WHERE title = ?";
+    connection.query(query, [answers.title], (err, results) => {
+      if (err) {
+        console.error("Error fetching employees by role:", err);
+      } else {
+        console.table(results);
+      }
+      mainMenu();
+    });
+  });
+}
+
+function endProgram() {
+  process.exit()
+}
+
+mainMenu()
