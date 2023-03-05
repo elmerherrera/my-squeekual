@@ -1,6 +1,6 @@
-INSERT INTO employees (firtsName, lastName, title, department, salary, isManager, manager)
+INSERT INTO employees (firstName, lastName, title, department, salary, isManager, manager)
 VALUES ('Izzy','Brassell','President','CEO',100000,true,'Board of Directors'),
-('Elmer','Herrera','Vice President',Managment,80000,true,'Izzy Brassell'),
+('Elmer','Herrera','Vice President','Managment',80000,true,'Izzy Brassell'),
 ('John','Rambo','Director','Artillery',70000,true,'Elmer Herrera'),
 ('Darth','Maul','Director','Defense',70000,true,'Elmer Herrera'),
 ('Luke','Skywalker','Manager','Defense',60000,true,'Darth Maul'),

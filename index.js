@@ -88,7 +88,7 @@ function addEmployee() {
 ]).then(answers => {
     if (!answers.isManager) {
       // Look up the first manager in the employee's department
-      const query = SELECT * `FROM employees WHERE department = ? AND isManager = true LIMIT 1`;
+      const query = `SELECT * FROM employees WHERE department = ? AND isManager = true LIMIT 1`;
       connection.query(query, [answers.department], (err, results) => {
         if (err) throw err;
         const manager = results[0];
